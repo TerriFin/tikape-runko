@@ -96,7 +96,7 @@ public class AnnosRaakaAineDao {
     
     /**
      * Laita tämä aina jos poistetaan raakaAine, jottei jää smoothieita, joilla on raakaAineita joita ei ole enää olemassa!
-     * @param raakaAineId RaakaAineen id
+     * @param raakaAineId RaakaAineen Id
      * @throws SQLException 
      */
     public void poistaRaakaAineenMukaan(int raakaAineId) throws SQLException {
