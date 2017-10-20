@@ -81,7 +81,7 @@ public class AnnosRaakaAineDao {
     /**
      * Laita tämä aina jos poistetaan annos, jottei jää smoothieita, joilla on annoksia joita ei ole enää olemassa!
      * @param annosId Annoksen id
-     * @throws SQLexception 
+     * @throws SQlexception 
      */
     public void poistaAnnoksenMukaan(int annosId) throws SQLException {
         Connection conn = this.database.getConnection();
