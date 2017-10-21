@@ -1,1 +1,29 @@
+<html>
+<head>
+  <title>Raaka-aineet</title>
+</head>
+<body>
+  <h2>Raaka-aineet</h2>
+  
+    <ul>
+    <li th:each="RaakaAine: ${RaakaAineet}">
+      <a th:href="@{~/RaakaAineet/{id}(id=${RaakaAine.id})}">
+        <span th:text="${RaakaAine.nimi}">Aines</span>
+      </a>
+    </li>
+  </ul>
 
+  <h4>Lisää uusi raaka-aine</h4>
+  
+  <form method="POST" action="">
+      Raaka-aineen nimi:<br/>
+      <input type="text" name="aine"/><br/>
+      <input type="submit" value="Lisää"/>
+  </form>
+
+  <ul>
+    <li>
+      <a href="../">Smoothielistaukseen</a>
+    </li>
+  </ul>
+</html>
