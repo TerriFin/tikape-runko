@@ -5,9 +5,9 @@
 <body>
   <h1>Smoothielista</h1>
   <ul>
-    <li th:each="smoothie: ${smoothiet}">
-      <a th:href="@{~/smoothiet/{id}(id=${smoothie.id})}">
-        <span th:text="${smoothie.nimi}">Smoothie</span>
+    <li th:each="Annos: ${Annokset}">
+      <a th:href="@{~/Annokset/{id}(id=${Annos.id})}">
+        <span th:text="${Annos.nimi}">Smoothie</span>
       </a>
     </li>
   </ul>
@@ -15,10 +15,10 @@
   <h2>Toiminnot</h2>
   <ul>
     <li>
-      <a href="smoothiet/">Luo uusi smoothie</a>
+      <a href="Annokset/">Luo uusi smoothie</a>
     </li>
     <li>
-      <a href="ainekset/">Tarkastele ja lisää aineksia</a>
+      <a href="RaakaAineet/">Tarkastele ja lisää aineksia</a>
     </li>
   </ul>
   </body>
