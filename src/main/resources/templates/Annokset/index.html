@@ -7,8 +7,12 @@
   <h2>Smoothiet</h2>
 
   <ul>
-    <li><a href="2/">Aurinkolasit</a> (<a href="2/poista">poista</a>)</li>
-    <li><a href="1/">Mustikkaplorays</a> (<a href="1/poista">poista</a>)</li>
+    <li th:each="Annos: ${Annokset}">
+      <a th:href="@{~/Annokset/{id}(id=${Annos.id})}">
+        <span th:text="${Annos.nimi}">Smoothie</span>
+      </a>
+       (<a href="2/poista">poista</a>)
+    </li>
   </ul>
 
 
