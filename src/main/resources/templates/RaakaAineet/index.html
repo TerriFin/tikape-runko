@@ -1,23 +1,37 @@
-<html>
+<!--
+Tämä sivu haluaa raakaAineet listassa olioina.
+
+/poistaRaakaAine
+Sivu myös postaa nimellä poistettavaRaakaAine sellaisen raaka-aineen id:n, joka
+tulisi poistaa tietokannasta.
+
+/lisaaRaakaAine
+Sivu myös postaa nimellä lisattavaRaakaAine sellaisen raaka-aineen nimen, joka
+tulisi lisätä tietokantaan.
+-->
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
   <title>Raaka-aineet</title>
 </head>
 <body>
   <h2>Raaka-aineet</h2>
   
-    <ul>
-    <li th:each="RaakaAine: ${RaakaAineet}">
-      <a th:href="@{~/RaakaAineet/{id}(id=${RaakaAine.id})}">
-        <span th:text="${RaakaAine.nimi}">Aines</span>
-      </a>
-    </li>
-  </ul>
+    <ul style="list-style: none;">
+        <li th:each="raakaAine: ${raakaAineet}">
+            <span style="float: left;" th:text="${raakaAine.nimi}">testi</span>
+            <form method="POST" action="/poistaRaakaAine">
+                <input type="hidden" name="poistettavaRaakaAine" th:value="${raakaAine.id}"/>
+                <input type="submit" value="Poista"/>
+            </form>
+        </li>
+    </ul>
 
   <h4>Lisää uusi raaka-aine</h4>
   
-  <form method="POST" action="/RaakaAineet">
+  <form method="POST" action="/lisaaRaakaAine">
       Raaka-aineen nimi:<br/>
-      <input type="text" name="aine"/><br/>
+      <input type="text" name="lisattavaRaakaAine"/><br/>
       <input type="submit" value="Lisää"/>
   </form>
 
@@ -26,4 +40,5 @@
       <a href="../">Smoothielistaukseen</a>
     </li>
   </ul>
+</body>  
 </html>

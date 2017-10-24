@@ -1,13 +1,18 @@
-<html>
+<!--
+Tämä sivu haluaa raakaAineet-nimisen hashmapin, johon tietokannan
+raaka-aineet on tallennettu olioina.
+-->
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
   <title>Smoothiet</title>
 </head>
 <body>
   <h1>Smoothielista</h1>
   <ul>
-    <li th:each="Annos: ${Annokset}">
-      <a th:href="@{~/Annokset/{id}(id=${Annos.id})}">
-        <span th:text="${Annos.nimi}">Smoothie</span>
+    <li th:each="annos: ${annokset}">
+      <a th:href="@{~/Annokset/{id}(id=${annos.id})}">
+        <span th:text="${annos.nimi}">testi</span>
       </a>
     </li>
   </ul>

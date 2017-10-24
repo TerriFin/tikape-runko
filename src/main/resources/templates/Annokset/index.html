@@ -1,4 +1,21 @@
-<html>
+<!--
+Tämä sivu haluaa tietokannan annokset listassa olioina. 
+
+/poistaAnnos
+Sivu myös postaa nimellä poistettavaAnnos sellaisen annoksen id:n, joka
+tulisi poistaa tietokannasta.
+
+/lisaaAnnos
+Sivu myös postaa nimellä lisattavaAnnos sellaisen annoksen nimen, joka
+tulisi lisätä tietokantaan.
+
+/muokkaaAnnos
+Sivu postaa myös muokattavan annoksen id:n(muokattavaAnnos), siihen lisättävän
+raaka-aineen id:n(annokseenLisattavaRaakaAine) ja AnnosRaakaAine-tauluun menevät
+arvot järjestys, määrä ja ohje.
+-->
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
   <title>Smoothiet</title>
 </head>
@@ -6,46 +23,50 @@
 
   <h2>Smoothiet</h2>
 
-  <ul>
-    <li th:each="Annos: ${Annokset}">
-      <a th:href="@{~/Annokset/{id}(id=${Annos.id})}">
-        <span th:text="${Annos.nimi}">Smoothie</span>
-      </a>
-       (<a href="2/poista">poista</a>)
-    </li>
+  <ul style="list-style: none;">
+        <li th:each="annos: ${annokset}">
+            <a th:href="@{~/Annokset/{id}(id=${annos.id})}">
+                <span style="float: left;" th:text="${annos.nimi}">testi</span>
+            </a>
+            <form method="POST" action="/poistaAnnos">
+                <input type="hidden" name="poistettavaAnnos" th:value="${annos.id}"/>
+                <input type="submit" value="Poista"/>
+            </form>
+        </li>
   </ul>
 
 
   <h4>Lisää uusi</h4>
   
-  <form method="POST" action="">
+  <form method="POST" action="/lisaaAnnos">
       Smoothien nimi:<br/>
-      <input type="text" name="aine"/><br/>
+      <input type="text" name="lisattavaAnnos"/><br/>
       <input type="submit" value="Lisää"/>
   </form>
 
   <h4>Lisää raaka-aineita</h4>
 
-  <form method="POST" action="">
+  <form method="POST" action="/muokkaaAnnos">
       Smoothien nimi:<br/>
-      <select name="smoothie">
-        <option name="2">Aurinkolasit</option>
-        <option name="1">Mustikkaplorays</option>
+      <select name="muokattavaAnnos">
+          <option th:each ="annos: ${annokset}" th:name="${annos.id}" th:text="${annos.nimi}">
+              testi
+          </option>
       </select>
       <br/>
       Lisättävä raaka-aine<br/>
-      <select name="raakaAine">
-        <option name="1">Appelsiini</option>
-        <option name="2">Banaani</option>
-        <option name="...">...</option>
+      <select name="annokseenLisattavaRaakaAine">
+        <option th:each ="raakaAine: ${raakaAineet}" th:value="${raakaAine.id}" th:text="${raakaAine.nimi}">
+            testi
+        </option>
       </select>
       <br/>
       Järjestys<br/>
-      <input type="text"/><br/>
+      <input type="text" name="järjestys"/><br/>
       Määrä<br/>
-      <input type="text"/><br/>
+      <input type="text" name="määrä"/><br/>
       Ohje<br/>
-      <input type="text"/><br/>
+      <input type="text" name="ohje"/><br/>
       <input type="submit" value="Lisää"/>
   </form>
 
@@ -54,4 +75,5 @@
       <a href="../">Smoothielistaukseen</a>
     </li>
   </ul>
+</body>  
 </html>

@@ -1,20 +1,40 @@
-<html>
+<!--
+Yksittäisten annosten sivut tulee luoda tämän tiedoston mukaan. Toteutustavasta
+riippuen, voidaan mahdollisesti poistaa lopuksi.
+
+Sivu tahtoo annoksen oliona ja annokseen liittyvät AnnosRaakaAineet
+JÄRJESTYKSESSÄ jarjestys-attribuutin mukaan. Tämä on käsittääkseni mahdollista
+Thymeleafissa.
+
+Vaihtoehtoisesti ol:n voi vaihtaa ul:ksi ja kommentit voi ottaa
+pois kommentoidun spanin ja pisteen ympäriltä. Tällöin raaka-aineiden järjestys
+annetaan, mutta ne eivät ole listassa järjestyksessä.
+-->
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>Mustikkaplorays</title>
+    <title th:text="${annos.nimi}">testi</title>
 </head>
 <body>
 
-  <h2>Mustikkaplorays</h2>
+  <h2 th:text="${annos.nimi}">testi</h2>
 
-  <ul>
-    <li>Banaani, 2 kpl</li>
-    <li>Mustikka, 5 dl</li>
-    <li>Maito, 2 dl</li>
-  </ul>
+  <ol>
+      <li th:each="annosRaakaAine: ${annosRaakaAineet}">
+          <!--<span th:text="${annosRaakaAine.jarjestys}">testi</span>
+          .-->
+          <span th:text="${annosRaakaAine.raakaAine.nimi}">testi</span>
+          ,
+          <span th:text="${annosRaakaAine.maara}">testi</span>
+          .
+          <span th:text="${annosRaakaAine.ohje}">testi</span>
+      </li>
+  </ol>
 
   <ul>
     <li>
       <a href="../../">Smoothielistaukseen</a>
     </li>
   </ul>
+</body>
 </html>
