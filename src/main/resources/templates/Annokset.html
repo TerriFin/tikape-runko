@@ -1,0 +1,103 @@
+<!--
+Tämä sivu haluaa tietokannan annokset listassa olioina. 
+
+/poistaAnnos
+Sivu myös postaa nimellä poistettavaAnnos sellaisen annoksen id:n, joka
+tulisi poistaa tietokannasta.
+
+/lisaaAnnos
+Sivu myös postaa nimellä lisattavaAnnos sellaisen annoksen nimen, joka
+tulisi lisätä tietokantaan.
+
+/muokkaaAnnos
+Sivu postaa myös muokattavan annoksen id:n(muokattavaAnnos), siihen lisättävän
+raaka-aineen id:n(annokseenLisattavaRaakaAine) ja AnnosRaakaAine-tauluun menevät
+arvot järjestys, määrä ja ohje.
+-->
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Smoothiet</title>
+    <style>
+      * {
+        font-family: calibri, arial, sans-serif;
+      }
+      body {
+        margin: 0;
+        padding: 0;
+        border: 0;
+      }
+      h2 {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        color: #ffffff;
+      }
+      h4 {
+        margin: 0;
+        margin-left: 10px;
+        padding: 0;
+        border: 0;
+      }
+  </style>
+</head>
+<body>
+
+  <div style="margin: 0; padding: 10px; border: 0; background-color: #66ccff;">
+    <h2>Smoothieiden hallinta</h2>
+  </div>
+  <ul style="list-style: none; margin-bottom: 20px; margin-top: 20px;">
+        <li th:each="annos: ${annokset}">
+            <a th:href="@{~/Annokset/{id}(id=${annos.id})}">
+                <span style="float: left;" th:text="${annos.nimi}">testi</span>
+            </a>
+            <form method="POST" action="/poistaAnnos">
+                <input type="hidden" name="poistettavaAnnos" th:value="${annos.id}"/>
+                <input style="margin-left: 10px;" type="submit" value="Poista"/>
+            </form>
+        </li>
+  </ul>
+
+  <h4>Lis&auml;&auml; uusi Smoothie</h4>
+  <div style="margin-left: 20px; margin-bottom: 30px; margin-top: 10px; padding: 0; border: 0;">
+    <form method="POST" action="/lisaaAnnos">
+        Smoothien nimi<br/>
+        <input type="text" name="lisattavaAnnos"/><br/>
+        <input type="submit" value="Lis&auml;&auml;"/>
+    </form>
+  </div>
+
+  <h4>Lis&auml;&auml; Smoothieen valmistusohje</h4>
+  <div style="margin-left: 20px; margin-bottom: 30px; margin-top: 10px; padding: 0; border: 0;">
+    <form method="POST" action="/muokkaaAnnos">
+        Smoothien nimi<br/>
+        <select name="muokattavaAnnos">
+            <option th:each ="annos: ${annokset}" th:value="${annos.id}" th:text="${annos.nimi}">
+                testi
+            </option>
+        </select>
+        <br/>
+        Lis&auml;tt&auml;v&auml; raaka-aine<br/>
+        <select name="annokseenLisattavaRaakaAine">
+          <option th:each ="raakaAine: ${raakaAineet}" th:value="${raakaAine.id}" th:text="${raakaAine.nimi}">
+              testi
+          </option>
+        </select>
+        <br/>
+        J&auml;rjestys<br/>
+        <input type="text" name="jarjestys"/><br/>
+        M&auml;&auml;r&auml;<br/>
+        <input type="text" name="maara"/><br/>
+        Ohje<br/>
+        <input type="text" name="ohje"/><br/>
+        <input type="submit" value="Lis&auml;&auml;"/>
+    </form>
+  </div>
+
+  <ul>
+    <li>
+      <a href="../">Smoothielistaukseen</a>
+    </li>
+  </ul>
+</body>  
+</html>
