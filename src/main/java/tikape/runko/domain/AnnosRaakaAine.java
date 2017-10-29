@@ -43,4 +43,5 @@ public class AnnosRaakaAine {
     public String getOhje() {
         return this.ohje;
     }
+    
 }
